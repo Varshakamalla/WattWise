@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}  <!-- Load static files -->
+
+{% block title %}Register - WattWise{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Register</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-box">
+                <input type="text" name="username" id="username" placeholder="Username" required>
+            </div>
+            <div class="input-box">
+                <input type="email" name="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password1" id="password1" placeholder="Password" required>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password2" id="password2" placeholder="Confirm Password" required>
+            </div>
+            <button type="submit" class="btn">Register</button>
+        </form>
+        <div class="links">
+            <a href="{% url 'login' %}">Already have an account? Login</a>
+        </div>
+    </div>
+{% endblock %}

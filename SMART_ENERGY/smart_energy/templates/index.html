@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WattWise - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hero-image {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            transform: rotate(-2deg);
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100%;
+            height: 100%;
+            background: #00bcd4;
+            border-radius: 1rem;
+            z-index: -1;
+            transform: rotate(6deg);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between px-10 py-4 shadow">
+        <div class="text-2xl font-bold text-teal-600"> <span class="text-black">WattWise</span></div>
+        <ul class="flex space-x-6 font-medium">
+            <li><a href="{% url 'index' %}" class="hover:text-blue-600">🏠 Home</a></li>
+            <li><a href="{% url 'predict' %}" class="hover:text-blue-600">🔍 Predict</a></li>
+            <li><a href="{% url 'upload' %}" class="hover:text-blue-600">📤 Upload</a></li>
+            <li><a href="{% url 'grid_login' %}" class="hover:text-blue-600">⚡ Grid Optimizer</a></li>
+        </ul>
+        <div>
+            <a href="{% url 'profile' %}" class="text-2xl">👤</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="flex flex-col-reverse md:flex-row items-center justify-between px-10 py-16 bg-gradient-to-br from-white to-blue-50 relative overflow-hidden">
+        <div class="md:w-1/2 z-10">
+            <h1 class="text-5xl font-black leading-tight mb-6">
+                Smart Energy <br><span class="text-blue-600">Intelligent Savings</span>
+            </h1>
+            <p class="text-gray-600 mb-6 text-lg">
+                WattWise helps you monitor, predict, and optimize your energy consumption.
+                Take control of your energy usage with AI-powered insights and recommendations.
+            </p>
+            <div class="space-x-4">
+                <a href="{% url 'predict' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow">Get Started →</a>
+                <a href="{% url 'predict' %}" class="border border-blue-600 text-blue-600 hover:bg-blue-100 px-6 py-3 rounded-lg font-semibold shadow">Learn More</a>
+            </div>
+        </div>
+        <div class="md:w-1/2 relative flex justify-center mb-10 md:mb-0">
+            <div class="bg-overlay"></div>
+            <img src="{% static 'D:\Projects\SMART_ENERGY\smart_energy\static\images\images.jpg' %}" alt="Solar Panels" class="hero-image rounded-xl shadow-lg">
+        </div>
+    </section>
+
+    <!-- Smart Energy Management -->
+    <section class="text-center px-6 py-16 bg-white">
+        <h2 class="text-3xl font-extrabold mb-4">Smart Energy Management</h2>
+        <p class="text-gray-600 text-lg max-w-3xl mx-auto mb-10">
+            Our comprehensive suite of tools helps you understand and optimize your energy consumption.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <div class="p-6 border rounded-xl shadow-sm bg-blue-50">
+                <p class="text-3xl mb-2">📊</p>
+                <h3 class="font-semibold text-xl">Energy Predictions</h3>
+                <p class="text-gray-600 text-sm mt-2">Predict your future energy consumption based on historical data and weather patterns.</p>
+            </div>
+
+            <div class="p-6 border rounded-xl shadow-sm bg-orange-50">
+                <p class="text-3xl mb-2">📤</p>
+                <h3 class="font-semibold text-xl">Data Upload</h3>
+                <p class="text-gray-600 text-sm mt-2">Upload your energy consumption data for analysis and personalized insights.</p>
+            </div>
+
+            <div class="p-6 border rounded-xl shadow-sm bg-green-50">
+                <p class="text-3xl mb-2">⚙️</p>
+                <h3 class="font-semibold text-xl">Grid Optimization</h3>
+                <p class="text-gray-600 text-sm mt-2">Optimize your energy usage to reduce costs and environmental impact.</p>
+            </div>
+
+            <div class="p-6 border rounded-xl shadow-sm bg-purple-50">
+                <p class="text-3xl mb-2">📈</p>
+                <h3 class="font-semibold text-xl">Usage Insights</h3>
+                <p class="text-gray-600 text-sm mt-2">Get detailed insights into your energy consumption patterns and trends.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

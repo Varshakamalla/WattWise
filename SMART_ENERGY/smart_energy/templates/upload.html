@@ -1,0 +1,118 @@
+{% extends "base2.html" %}
+{% block content %}
+<style>
+body {
+    background-color: #f7f9fc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.container {
+    max-width: 1140px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    padding-top: 20px;
+    margin: auto;
+}
+h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+    color: #444;
+}
+input[type="file"] {
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 6px;
+    width: 100%;
+    background-color: #fdfdfd;
+}
+button.btn {
+    background-color: #0066cc;
+    border-color: #0066cc;
+    padding: 10px 20px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+button.btn:hover {
+    background-color: #004c99;
+}
+.alert {
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+    background-color: #000;
+    color: #fff;
+}
+.table thead {
+    background-color: #222;
+    font-weight: 600;
+}
+.table-bordered th, .table-bordered td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: left;
+}
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+.file-name {
+    font-weight: 600;
+    color: #000;
+    margin-top: 20px;
+}
+</style>
+
+<div class="container mt-5 pt-5">
+    <h2>Upload Data for Energy Consumption Forecast</h2>
+    <form method="POST" enctype="multipart/form-data" class="mt-3">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="data_file">Choose CSV or Excel File</label>
+            <input type="file" name="data_file" id="data_file" class="form-control-file" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Upload and Predict</button>
+    </form>
+
+    {% if error %}
+    <div class="alert alert-danger mt-3">{{ error }}</div>
+    {% endif %}
+
+    {% if success %}
+    <div class="alert alert-success mt-3">{{ success }}</div>
+    {% endif %}
+
+    {% if file_name %}
+    <div class="file-name">📁 Uploaded File: {{ file_name }}</div>
+    {% endif %}
+
+    {% if dataset %}
+    <h4 class="mt-4">Prediction Result (Top 30)</h4>
+    <div class="table-responsive">
+        {{ dataset|safe }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

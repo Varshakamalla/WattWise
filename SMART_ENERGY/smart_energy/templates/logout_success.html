@@ -1,0 +1,35 @@
+{% block title %}Logout Successful - WattWise{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Logout Successful</h2>
+    <p>You have been logged out successfully.</p>
+    <a href="{% url 'login' %}" class="btn login-again-btn">Login Again</a>
+</div>
+
+<style>
+    .container {
+        max-width: 500px;
+        margin: auto;
+        padding: 20px;
+        background: #f4f4f4;
+        border-radius: 10px;
+        text-align: center;
+    }
+    h2, p {
+        color: black;
+    }
+    .btn {
+        background: green;
+        color: white !important;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        font-weight: bold;
+    }
+    .btn:hover {
+        background: darkgreen;
+    }
+</style>
+{% endblock %}

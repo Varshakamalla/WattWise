@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}WattWise{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    
+    {% block style %}{% endblock %}
+</head>
+<body class="font-sans">
+
+    <!-- ======= NAVBAR ======= -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white shadow-md px-6 py-3 md:px-12 flex items-center justify-between rounded-b-2xl">
+        <!-- Logo -->
+        <div class="text-3xl font-extrabold bg-gradient-to-r from-blue-500 to-teal-400 text-transparent bg-clip-text">
+            WattWise
+        </div>
+    
+        <!-- Menu -->
+        <ul class="hidden md:flex space-x-8 text-lg font-medium text-gray-700">
+            <li>
+                <a href="{% url 'index' %}" class="hover:text-blue-600 transition duration-300">🏠 Home</a>
+            </li>
+            <li>
+                <a href="{% url 'predict' %}" class="hover:text-blue-600 transition duration-300">🔍 Predict</a>
+            </li>
+            <li>
+                <a href="{% url 'upload' %}" class="hover:text-blue-600 transition duration-300">📤 Upload</a>
+            </li>
+            <li>
+                <a href="{% url 'grid_login' %}" class="hover:text-blue-600 transition duration-300">⚡ Grid Optimizer</a>
+            </li>
+        </ul>
+    
+        <!-- Profile Icon -->
+        <div>
+            <a href="{% url 'profile' %}" class="text-2xl hover:text-blue-600 transition duration-300">👤</a>
+        </div>
+    </nav>
+
+    <!-- ======= PAGE CONTENT ======= -->
+    {% block content %}{% endblock %}
+
+</body>
+</html>

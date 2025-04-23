@@ -1,0 +1,169 @@
+{% extends "base2.html" %}
+{% block content %}
+<style>
+    body {
+        background-color: #f5f7fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 100px auto 50px;
+        background: white;
+        padding-top: 900px;
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 28px;
+        color: #333;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .form-group {
+        flex: 1 1 45%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #444;
+    }
+
+    input, select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+        color: #000; /* 🖤 Text inside inputs and dropdowns will be black */
+    }
+    
+
+    button {
+        margin-top: 30px;
+        width: 100%;
+        padding: 14px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .result {
+        margin-top: 30px;
+        background-color: #e0ffe0;
+        padding: 20px;
+        text-align: center;
+        font-weight: 600;
+        color: #2e7d32;
+        border-radius: 10px;
+        border: 1px solid #c3e6cb;
+    }
+</style>
+
+<div class="container">
+    <h2>Energy Consumption Prediction</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="timestamp">Timestamp:</label>
+            <input type="datetime-local" id="timestamp" name="timestamp" required>
+        </div>
+        <div class="form-group">
+            <label for="temperature">Temperature (°C):</label>
+            <input type="number" step="0.1" id="temperature" name="temperature" required>
+        </div>
+        <div class="form-group">
+            <label for="humidity">Humidity (%):</label>
+            <input type="number" step="0.1" id="humidity" name="humidity" required>
+        </div>
+        <div class="form-group">
+            <label for="day_of_week">Day of the Week:</label>
+            <select id="day_of_week" name="day_of_week">
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+                <option>Sunday</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="time_of_day">Time of Day:</label>
+            <select name="time_of_day">
+                <option>Early Morning</option>
+                <option>Morning</option>
+                <option>Afternoon</option>
+                <option>Evening</option>
+                <option>Night</option>
+                <option>Midnight</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="appliance_usage">Appliance Usage (kWh):</label>
+            <input type="number" step="0.1" id="appliance_usage" name="appliance_usage" required>
+        </div>
+        <div class="form-group">
+            <label for="building_type">Building Type:</label>
+            <select id="building_type" name="building_type">
+                <option>Residential</option>
+                <option>Commercial</option>
+                <option>Industrial</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="occupancy">Occupancy:</label>
+            <input type="number" id="occupancy" name="occupancy" required>
+        </div>
+        <div class="form-group">
+            <label for="renewable_energy">Renewable Energy Contribution (kWh):</label>
+            <input type="number" step="0.1" id="renewable_energy" name="renewable_energy" required>
+        </div>
+        <div class="form-group">
+            <label for="electricity_price">Electricity Price (per kWh):</label>
+            <input type="number" step="0.1" id="electricity_price" name="electricity_price" required>
+        </div>
+        <div class="form-group">
+            <label for="power_grid_load">Power Grid Load (MW):</label>
+            <input type="number" step="0.1" id="power_grid_load" name="power_grid_load" required>
+        </div>
+        <div class="form-group">
+            <label for="weather_conditions">Weather Conditions:</label>
+            <select id="weather_conditions" name="weather_conditions">
+                <option>Clear</option>
+                <option>Cloudy</option>
+                <option>Rainy</option>
+                <option>Stormy</option>
+            </select>
+        </div>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction is not None %}
+        <div class="result">
+            Predicted Energy Consumption: {{ prediction }} kWh
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

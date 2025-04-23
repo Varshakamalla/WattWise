@@ -1,0 +1,81 @@
+{% extends "base2.html" %}
+{% block title %}Profile - WattWise{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2>User Profile</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            <label for="id_email">Email:</label>
+            {{ form.email }}
+        </div>
+
+        <button type="submit" class="btn">Save Changes</button>
+    </form>
+    
+    <!-- Logout Button -->
+    <form method="post" action="{% url 'logout_success' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn logout-btn">Logout</button>
+    </form>
+</div>
+
+<style>
+    /* ✅ Make all text black */
+    body, label, input, h2, .btn {
+        color: black !important;
+    }
+
+    .container {
+        max-width: 500px;
+        margin: auto;
+        padding: 20px;
+        background: #f4f4f4;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .form-group {
+        margin: 15px 0;
+    }
+    label {
+        display: block;
+        font-weight: bold;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .btn {
+        background: #007bff; /* Blue button */
+        color: black !important; /* ✅ Ensure button text is black */
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    .btn:hover {
+        background: #0056b3;
+    }
+    
+    /* ✅ Style the logout button separately */
+    .logout-btn {
+        background: red;
+        margin-top: 15px;
+    }
+    .logout-btn:hover {
+        background: darkred;
+    }
+</style>
+{% endblock %}

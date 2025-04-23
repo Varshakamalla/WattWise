@@ -1,0 +1,156 @@
+{% comment %} {% extends "base2.html" %} {% endcomment %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center text-dark">⚡ Grid Load Optimizer Dashboard</h2>
+
+    <!-- 📤 CSV Upload Form -->
+    <div class="mb-4 bg-white p-4 rounded-3 shadow-sm border">
+        <h5 class="mb-3">📁 Upload CSV File</h5>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row g-2 align-items-end">
+                <div class="col-md-9">
+                    <input type="file" name="csv_file" accept=".csv" class="form-control shadow-sm" required>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success w-100 shadow">Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if error %}
+        <div class="alert alert-danger shadow-sm">{{ error }}</div>
+    {% endif %}
+
+    <!-- ✅ Show below content ONLY after CSV is uploaded -->
+    {% if csv_uploaded %}
+
+    <!-- 🔢 Max, Min, Avg Load Cards -->
+    <div class="row text-dark mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card bg-light text-center text-dark p-3 rounded-4 shadow-sm h-100">
+                <h5 class="mb-2">📈 Max Load</h5>
+                <p class="fw-bold fs-5">{{ max_load }}</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card bg-light text-center text-dark p-3 rounded-4 shadow-sm h-100">
+                <h5 class="mb-2">📉 Min Load</h5>
+                <p class="fw-bold fs-5">{{ min_load }}</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card bg-light text-center text-dark p-3 rounded-4 shadow-sm h-100">
+                <h5 class="mb-2">📊 Avg Load</h5>
+                <p class="fw-bold fs-5">{{ avg_load }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔍 Search by Date & Hour -->
+    <div class="mb-4 bg-white p-4 rounded-3 shadow-sm border">
+        <h5 class="mb-3">🔍 Search by Date & Hour</h5>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row g-2 align-items-end">
+                <div class="col-md-5">
+                    <label class="form-label">Date</label>
+                    <input type="date" class="form-control shadow-sm" name="date" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Hour (0-23)</label>
+                    <input type="number" class="form-control shadow-sm" name="hour" min="0" max="23" placeholder="Hour" required>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-primary w-100 shadow">Get Data</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if current_consumption %}
+    <div class="alert alert-info mt-3 shadow-sm fs-6">
+        🔌 <strong>Predicted Energy Consumption:</strong> {{ current_consumption }} kWh
+    </div>
+    {% endif %}
+
+    {% if bar1 %}
+    <div class="mt-5">
+        <h5 class="text-dark">📊 Day vs Previous Day</h5>
+        <img src="{{ bar1 }}" class="img-fluid rounded shadow-sm border border-secondary-subtle" alt="Day vs Previous Day">
+    </div>
+    {% endif %}
+
+    {% if bar2 %}
+    <div class="mt-5">
+        <h5 class="text-dark">📉 Day vs Weekly Average</h5>
+        <img src="{{ bar2 }}" class="img-fluid rounded shadow-sm border border-secondary-subtle" alt="Day vs Weekly Avg">
+    </div>
+    {% endif %}
+
+    <!-- 🗂️ Data Table -->
+    <div class="mt-5">
+        <h4 class="text-dark mb-3">🗂️ Dataset Preview & Optimization Suggestions</h4>
+        <div class="table-responsive bg-white bg-opacity-75 p-3 rounded shadow-sm">
+            {{ dataset|safe }}
+        </div>
+    </div>
+
+    <!-- 📉 Chart.js Bar Chart -->
+    <div class="mt-5 bg-white p-4 rounded shadow-sm">
+        <h5 class="text-dark">📉 Energy Load Chart</h5>
+        <canvas id="loadChart" height="100"></canvas>
+    </div>
+
+    {% endif %}
+</div>
+
+<!-- 📊 Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% if csv_uploaded %}
+<script>
+const labels = {{ chart_labels|safe }};
+const data = {{ chart_data|safe }};
+const status = {{ chart_status|safe }};
+
+const backgroundColors = status.map(s =>
+    s === "High Load" ? "rgba(255, 99, 132, 0.7)" :
+    s === "Normal" ? "rgba(75, 192, 192, 0.7)" :
+    "rgba(255, 206, 86, 0.7)"
+);
+
+const ctx = document.getElementById('loadChart').getContext('2d');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Predicted Energy Consumption (kWh)',
+            data: data,
+            backgroundColor: backgroundColors,
+            borderRadius: 6
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: { color: "#333" }
+            },
+            x: {
+                ticks: { color: "#333" }
+            }
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: "#000"
+                }
+            }
+        }
+    }
+});
+</script>
+{% endif %}
+{% endblock %}

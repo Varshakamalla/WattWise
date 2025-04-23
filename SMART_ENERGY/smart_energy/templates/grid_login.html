@@ -1,0 +1,147 @@
+
+{% comment %} {% extends "base2.html" %} {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grid Operator Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        nav {
+            width: 100%;
+            background-color: #ffffff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+        }
+
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-size: 1rem;
+            color: #2c3e50;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #007BFF;
+        }
+
+        .profile-icon {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 120px auto 0 auto;
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .login-container button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">WattWise</div>
+        <ul>
+            <li><a href="{% url 'index' %}">🏠 Home</a></li>
+            <li><a href="{% url 'predict' %}">🔍 Predict</a></li>
+            <li><a href="{% url 'upload' %}">📤 Upload</a></li>
+            <li><a href="{% url 'grid' %}">⚡ Grid Optimizer</a></li>
+        </ul>
+        <a href="{% url 'profile' %}" class="profile-icon">👤</a>
+    </nav>
+
+    <div class="login-container">
+        <h2>Grid Operator Login</h2>
+
+        {% if error %}
+            <p class="error-msg">{{ error }}</p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="pin">Enter PIN:</label><br>
+            <input type="password" name="pin" id="pin" required><br>
+            <button type="submit">Access Dashboard</button>
+        </form>
+    </div>
+
+</body>
+</html>
