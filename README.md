@@ -1,7 +1,7 @@
-⚡ WattWise: Smart Energy Forecasting and Grid Load Optimization System
+![image](https://github.com/user-attachments/assets/b7560392-f1d8-4178-b7fc-980008b21d5e)## ⚡ WattWise: Smart Energy Forecasting and Grid Load Optimization System
 WattWise is an intelligent energy management system that leverages machine learning to forecast energy consumption and optimize power grid load distribution. Built using Django and TensorFlow, this project promotes efficient energy usage and reduces peak-time overloads through predictive analytics and load optimization strategies.
 
-🔍 Key Features
+## 🔍 Key Features
 Energy Forecasting with CNN + BiLSTM: Predict future energy consumption using a deep learning model trained on time series data including weather, appliance usage, occupancy, and more.
 
 Grid Load Optimization: Analyze current and historical usage to detect peak hours and provide load-shifting suggestions.
@@ -12,7 +12,7 @@ Single & Bulk Prediction: Submit data through forms or upload CSV files to get e
 
 Full Stack Django App: Uses Django views, templates, and models to deliver a complete web-based interface.
 
-🧠 Technologies Used
+## 🧠 Technologies Used
 Frontend: HTML, CSS, JavaScript (via Django Templates)
 
 Backend: Django (Python)
@@ -23,7 +23,10 @@ Database: MySQL
 
 Deployment: Google Colab for model training, .h5 model for real-time prediction
 
-📊 Input Features
+## ScreenShot
+![image](https://github.com/user-attachments/assets/b40ecbae-f7ed-495f-9188-c1e7ac65ca25)
+
+## 📊 Input Features
 Date, Time of Day
 
 Humidity, Temperature
@@ -36,7 +39,7 @@ Electricity Price, Power Grid Load
 
 Weather Conditions
 
-✅ Outputs
+## ✅ Outputs
 Predicted Energy Consumption (kWh)
 
 Grid Load Status (Normal/High Load)
