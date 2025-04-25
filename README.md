@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/b7560392-f1d8-4178-b7fc-980008b21d5e)## ⚡ WattWise: Smart Energy Forecasting and Grid Load Optimization System
+## ⚡ WattWise: Smart Energy Forecasting and Grid Load Optimization System
 WattWise is an intelligent energy management system that leverages machine learning to forecast energy consumption and optimize power grid load distribution. Built using Django and TensorFlow, this project promotes efficient energy usage and reduces peak-time overloads through predictive analytics and load optimization strategies.
 
 ## 🔍 Key Features
